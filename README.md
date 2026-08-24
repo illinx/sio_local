@@ -22,4 +22,5 @@ River City Ransom EX
 
 Mario Tennis
 
+* Unlike this others, this is a bps patch instead of ips. The ROM seems to be completely full and I could not find any free space within the 16MB jump range.
 * Start story mode and choose to play doubles, and your partner will be controlled by 2P. No other modes are touched or supported right now. There is currently no way for P2 to join/leave the game--they are always in control in this mode.
