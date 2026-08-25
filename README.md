@@ -57,6 +57,15 @@ So the messages look something like this, in binary:
 | `c` | 1 | `connected` | `1` = controller present, `0` = empty slot |
 | `k` | 10 | `KEYINPUT` | `0` = pressed. MSB -> LSB order: L R Down Up Left Right Start Select B A |
 
+#### Host -> GBA messages
+
+| Bits |  Controller | Rumble on | Rumble off | Guard |
+|---|---|---|---|---|
+| 31-24 | 3 | `0110 0110` (`0x66`) | `0100 0000` (`0x40`) | bits 31-30 = `01` |
+| 23-16 | 2 | `0010 0110` (`0x26`) | `0000 0000` (`0x00`) | — |
+| 15-8  | 1 | `0010 0110` (`0x26`) | `0000 0000` (`0x00`) | — |
+| 7-0   | 0 | `0010 0110` (`0x26`) | `0000 0100` (`0x04`) | bits 3-2 = `01` |
+
 The data for controller 0, w, is in the same position as rumble data in the GBP Rumble protocol, so in that sense it's backward compatible with GBP Rumble.
 
 Currently, my VBA-M fork always reports all four controllers as connected, and only player 1 can receive rumble. These are due to upstream limitations and they should not affect the GBP version.
