@@ -8,7 +8,7 @@ A fork of VBA-M which supports sio_local, as well as GBP SIO Rumble, can be foun
 
 __The Spec__
 
-Based on GBP's SIO rumble feature, documented here: https://problemkaputt.de/gbatek-gba-gameboy-player.htm
+Based on GBP's SIO rumble feature: https://problemkaputt.de/gbatek-gba-gameboy-player.htm
 
 The first 12 positions are identical to the GBP rumble protocol, and then messages 13-16 contain the data for players 1-4.
 
@@ -36,7 +36,7 @@ After the handshake is complete, messages are sent according to the following pr
 | 4-13  | 10 | `KEYINPUT` | GBA convention — **0 = pressed** |
 | 14    | 1  | `connected` | 1 = a controller is present in this slot |
 | 15-16 | 2  | `controller_index` | 0-3 |
-| 17-27 | 11 | reserved | reserved |
+| 17-27 | 11 | reserved | reserved for future inputs |
 | 28-31 | 4  | `0x3` marker | always `0x3` |
 
 So the messages look something like this, in binary:
