@@ -12,7 +12,7 @@ Based on GBP's SIO rumble feature, documented here: https://problemkaputt.de/gba
 
 The first 12 positions are identical to the GBP rumble protocol, and then messages 13-16 contain the data for players 1-4.
 
-| Pos | Receive (sio local) | Response (sio local) | Receive (GBP) | Response (GBP) |
+| Pos | Receive (Game) | Response (Game) | Receive (GBP) | Response (GBP) |
 |---|---|---|---|---|
 | 0  | `0000494E` | `494EB6B1` | `0000494E` | `494EB6B1` |
 | 1  | `0000494E` | `494EB6B1` | `0000494E` | `494EB6B1` |
