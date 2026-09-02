@@ -33,7 +33,7 @@ After the handshake is complete, messages are sent according to the following pr
 | Bits | Width | Field | Notes |
 |---|---|---|---|
 | 0-3   | 4  | `0x3` marker | always `0x3` |
-| 4-13  | 10 | `KEYINPUT` | GBA convention — **0 = pressed** |
+| 4-13  | 10 | `KEYINPUT` | same format as register 4000130h |
 | 14    | 1  | `connected` | 1 = a controller is present in this slot |
 | 15-16 | 2  | `controller_index` | 0-3 |
 | 17-27 | 11 | reserved | reserved for future inputs |
@@ -68,7 +68,7 @@ So the messages look something like this, in binary:
 
 The data for controller 0, w, is in the same position as rumble data in the GBP Rumble protocol, so in that sense it's backward compatible with GBP Rumble.
 
-Currently, my VBA-M fork always reports all four controllers as connected, and only player 1 can receive rumble. These are due to upstream limitations and they should not affect the GBP version.
+Currently, the sio_local VBA-M fork always reports all four controllers as connected, and only player 1 can receive rumble. These are due to upstream limitations and they should not affect the GBP version.
 
 __Individual Game Notes__
 
