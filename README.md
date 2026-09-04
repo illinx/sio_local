@@ -93,3 +93,7 @@ Mario Tennis
 
 Bomberman Tournament
 * "Player" is now a selectable option for each char in "1 Player" battle mode, and will use the corresponding controller.
+
+Invader
+* In 1P Arcade, Suvival, and Boss Attack modes, P2 can press Start to join the game.
+* The Kill % stat will credit all kills to P1, since it checks which console got the kill, not which player.
