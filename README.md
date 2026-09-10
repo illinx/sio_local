@@ -12,7 +12,7 @@ Based on GBP's SIO rumble feature: https://problemkaputt.de/gbatek-gba-gameboy-p
 
 Messages 0-12 are identical to the GBP rumble protocol, and then GBP messages 13-16 contain the input data for players 1-4, while the Game messages contain rumble information.
 
-| Pos | Receive (Game) | Response (Game) | Receive (GBP) | Response (GBP) |
+| Pos | Receive (Game) | Send (Game) | Receive (GBP) | Send (GBP) |
 |---|---|---|---|---|
 | 0  | `0000494E` | `494EB6B1` | `0000494E` | `494EB6B1` |
 | 1  | `0000494E` | `494EB6B1` | `0000494E` | `494EB6B1` |
@@ -47,6 +47,8 @@ So the messages look something like this, in binary:
 | 14 | host -> GBA | `0011 rrrrrrrrrrr 01 c kkkkkkkkkk 0011` |
 | 15 | host -> GBA | `0011 rrrrrrrrrrr 10 c kkkkkkkkkk 0011` |
 | 16 | host -> GBA | `0011 rrrrrrrrrrr 11 c kkkkkkkkkk 0011` |
+
+The reserved bits will probably be used in the future for directly mapping Gamecube button inputs, if a compelling reason arises.
 
 #### Legend
 
