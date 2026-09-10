@@ -10,7 +10,7 @@ __The Spec__
 
 Based on GBP's SIO rumble feature: https://problemkaputt.de/gbatek-gba-gameboy-player.htm
 
-The first 12 positions are identical to the GBP rumble protocol, and then GBP messages 13-16 contain the input data for players 1-4. 
+Messages 0-12 are identical to the GBP rumble protocol, and then GBP messages 13-16 contain the input data for players 1-4, while the Game messages contain rumble information.
 
 | Pos | Receive (Game) | Response (Game) | Receive (GBP) | Response (GBP) |
 |---|---|---|---|---|
