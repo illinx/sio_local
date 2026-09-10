@@ -10,7 +10,7 @@ __The Spec__
 
 Based on GBP's SIO rumble feature: https://problemkaputt.de/gbatek-gba-gameboy-player.htm
 
-The first 12 positions are identical to the GBP rumble protocol, and then messages 13-16 contain the data for players 1-4. 
+The first 12 positions are identical to the GBP rumble protocol, and then GBP messages 13-16 contain the input data for players 1-4. 
 
 | Pos | Receive (Game) | Response (Game) | Receive (GBP) | Response (GBP) |
 |---|---|---|---|---|
@@ -28,12 +28,12 @@ The first 12 positions are identical to the GBP rumble protocol, and then messag
 | 11 | `20000013` | `40000004` | `20000013` | `40000004` |
 | 12 | `30000003` | `40000004` | `30000003` | `40000004` |
 
-After the handshake is complete, messages are sent according to the following protocol:
+The messages conform to the following protocol:
 
 | Bits | Width | Field | Notes |
 |---|---|---|---|
 | 0-3   | 4  | `0x3` marker | always `0x3` |
-| 4-13  | 10 | `KEYINPUT` | same format as register 4000130h |
+| 4-13  | 10 | `KEYINPUT` | same format as register 4000130h on GBA |
 | 14    | 1  | `connected` | 1 = a controller is present in this slot |
 | 15-16 | 2  | `controller_index` | 0-3 |
 | 17-27 | 11 | reserved | reserved for future inputs |
@@ -88,8 +88,8 @@ River City Ransom EX
 
 Mario Tennis
 
-* Unlike the others, this is a bps patch instead of ips. The ROM seems to be completely full and I could not find any free space within the 16MB jump range.
 * Start story mode and choose to play doubles, and your partner will be controlled by 2P. No other modes are touched or supported right now. There is currently no way for P2 to join/leave the game--they are always in control in this mode.
+* Unlike the others, this is a bps patch instead of ips. The ROM seems to be completely full and I could not find any free space within the 16MB jump range.
 
 Bomberman Tournament
 * "Player" is now a selectable option for each char in "1 Player" battle mode, and will use the corresponding controller.
