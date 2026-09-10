@@ -10,25 +10,25 @@ __The Spec__
 
 Based on GBP's SIO rumble feature: https://problemkaputt.de/gbatek-gba-gameboy-player.htm
 
-Messages 0-12 are identical to the GBP rumble protocol, and then GBP messages 13-16 contain the input data for players 1-4, while the Game messages contain rumble information.
+Messages 0-12 are identical to the GBP rumble protocol:
 
-| Pos | Receive (Game) | Send (Game) | Receive (GBP) | Send (GBP) |
-|---|---|---|---|---|
-| 0  | `0000494E` | `494EB6B1` | `0000494E` | `494EB6B1` |
-| 1  | `0000494E` | `494EB6B1` | `0000494E` | `494EB6B1` |
-| 2  | `B6B1494E` | `544EB6B1` | `B6B1494E` | `544EB6B1` |
-| 3  | `B6B1544E` | `544EABB1` | `B6B1544E` | `544EABB1` |
-| 4  | `ABB1544E` | `4E45ABB1` | `ABB1544E` | `4E45ABB1` |
-| 5  | `ABB14E45` | `4E45B1BA` | `ABB14E45` | `4E45B1BA` |
-| 6  | `B1BA4E45` | `4F44B1BA` | `B1BA4E45` | `4F44B1BA` |
-| 7  | `B1BA4F44` | `4F44B0BB` | `B1BA4F44` | `4F44B0BB` |
-| 8  | `B0BB4F44` | `8000B0BB` | `B0BB4F44` | `8000B0BB` |
-| 9  | `B0BB8002` | `10000010` | `B0BB8002` | `10000010` |
-| 10 | `10000010` | `20000013` | `10000010` | `20000013` |
-| 11 | `20000013` | `40000004` | `20000013` | `40000004` |
-| 12 | `30000003` | `40000004` | `30000003` | `40000004` |
+| Pos | Receive| Response | 
+|---|---|---|
+| 0  | `0000494E` | `494EB6B1` | 
+| 1  | `0000494E` | `494EB6B1` | 
+| 2  | `B6B1494E` | `544EB6B1` | 
+| 3  | `B6B1544E` | `544EABB1` | 
+| 4  | `ABB1544E` | `4E45ABB1` | 
+| 5  | `ABB14E45` | `4E45B1BA` | 
+| 6  | `B1BA4E45` | `4F44B1BA` | 
+| 7  | `B1BA4F44` | `4F44B0BB` | 
+| 8  | `B0BB4F44` | `8000B0BB` | 
+| 9  | `B0BB8002` | `10000010` | 
+| 10 | `10000010` | `20000013` | 
+| 11 | `20000013` | `40000004` | 
+| 12 | `30000003` | `40000004` | 
 
-The messages conform to the following protocol:
+The difference is, in the GBP Rumble protocol, messages 13-16 are always simply `30000003`. sio_local packs information inside of these messages that patched games know how to read. These contain the input data for players 1-4. The messages conform to the following protocol:
 
 | Bits | Width | Field | Notes |
 |---|---|---|---|
@@ -43,12 +43,10 @@ So the messages look something like this, in binary:
 
 | Pos | Dir | Word |
 |---|---|---|
-| 13 | host -> GBA | `0011 rrrrrrrrrrr 00 c kkkkkkkkkk 0011` |
-| 14 | host -> GBA | `0011 rrrrrrrrrrr 01 c kkkkkkkkkk 0011` |
-| 15 | host -> GBA | `0011 rrrrrrrrrrr 10 c kkkkkkkkkk 0011` |
-| 16 | host -> GBA | `0011 rrrrrrrrrrr 11 c kkkkkkkkkk 0011` |
-
-The reserved bits will probably be used in the future for directly mapping Gamecube button inputs, if a compelling reason arises.
+| 13 | GBP -> GBA | `0011 rrrrrrrrrrr 00 c kkkkkkkkkk 0011` |
+| 14 | GBP -> GBA | `0011 rrrrrrrrrrr 01 c kkkkkkkkkk 0011` |
+| 15 | GBP -> GBA | `0011 rrrrrrrrrrr 10 c kkkkkkkkkk 0011` |
+| 16 | GBP -> GBA | `0011 rrrrrrrrrrr 11 c kkkkkkkkkk 0011` |
 
 #### Legend
 
@@ -59,7 +57,9 @@ The reserved bits will probably be used in the future for directly mapping Gamec
 | `c` | 1 | `connected` | `1` = controller present, `0` = empty slot |
 | `k` | 10 | `KEYINPUT` | `0` = pressed. MSB -> LSB order: L R Down Up Left Right Start Select B A |
 
-#### Host -> GBA messages
+The reserved bits will probably be used in the future for directly mapping Gamecube button inputs, if a compelling reason arises.
+
+#### GBA -> GBP messages
 
 The response messages contain rumble in the same format as GBP rumble, but with all four players packed into a single message:
 
